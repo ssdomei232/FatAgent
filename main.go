@@ -6,16 +6,14 @@ import (
 	"os/signal"
 	"syscall"
 
-	"git.mmeiblog.cn/mei/FatAgent/pkg"
+	"git.mmeiblog.cn/mei/FatAgent/internal"
 	"github.com/robfig/cron/v3"
 )
 
 func main() {
 	c := cron.New()
 
-	c.AddFunc("@every 1m", func() {
-		pkg.NewACController("/dev/tty1")
-	})
+	c.AddFunc("@every 1m", internal.Report)
 
 	c.Start()
 
